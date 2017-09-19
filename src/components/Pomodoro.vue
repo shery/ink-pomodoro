@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="container">
     <h1>{{ msg }}</h1>
 
     <button v-on:click="handleBreak(1)">+</button>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'pomodoro',
   data() {
     return {
       msg: 'Welcome to Pomodoro Clock, a extension for Ink-Editor.',
