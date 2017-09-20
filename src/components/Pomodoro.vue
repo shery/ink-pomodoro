@@ -6,9 +6,10 @@
     <span>{{ breakLen }}</span>
     <button v-on:click="handleBreak(-1)">-</button>
 
-  <button v-on:click="handleSession(1)">+</button>
-  <span>{{ session }}</span>
-  <button v-on:click="handleSession(-1)">-</button>
+    <button v-on:click="handleSession(1)">+</button>
+    <span>{{ session }}</span>
+    <button v-on:click="handleSession(-1)">-</button>
+    <div class="rest">{{ rest }}</div>
   </div>
 </template>
 
@@ -36,6 +37,8 @@ export default {
       if (!this.isPause) return;
       if (this.session === 1 && value === -1) return;
       this.session += value;
+      this.rest = this.session;
+      this.restSeconds = this.session * 60;
     },
   },
 };
@@ -45,6 +48,9 @@ export default {
 <style scoped>
 h1 {
   font-weight: normal;
+}
+.rest {
+  margin: 40px;
 }
 
 </style>
