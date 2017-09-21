@@ -10,6 +10,7 @@
     <span>{{ session }}</span>
     <button v-on:click="handleSession(-1)">-</button>
     <div class="rest">{{ rest }}</div>
+    <button v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
   </div>
 </template>
 
@@ -39,6 +40,40 @@ export default {
       this.session += value;
       this.rest = this.session;
       this.restSeconds = this.session * 60;
+    },
+    handleClick() {
+      const { isPause } = this;
+      if (isPause) {
+        this.isPause = !isPause;
+        this.timer = setInterval(this.setRestTime, 1000);
+      } else {
+        clearInterval(this.timer);
+        this.isPause = !isPause;
+      }
+    },
+    setRestTime() {
+      const { restSeconds } = this;
+      if (restSeconds === 0) {
+        if (this.timer) { clearInterval(this.timer); }
+        if (this.isBreak) {
+          this.isBreak = !this.isBreak;
+          this.restSeconds = this.session * 60;
+          this.rest = this.session;
+          this.timer = setInterval(this.setRestTime, 1000);
+          // return;
+        } else {
+          this.isBreak = !this.isBreak;
+          this.restSeconds = this.breakLen * 60;
+          this.rest = this.breakLen;
+          this.timer = setInterval(this.setRestTime, 1000);
+          // return;
+        }
+      }
+      const newRestSeconds = restSeconds - 1;
+      const restMinu = Math.floor(newRestSeconds / 60);
+      const restSec = Math.floor(newRestSeconds % 60);
+      this.rest = `${restMinu}:${restSec}`;
+      this.restSeconds = newRestSeconds;
     },
   },
 };
