@@ -60,14 +60,13 @@ export default {
           this.restSeconds = this.session * 60;
           this.rest = this.session;
           this.timer = setInterval(this.setRestTime, 1000);
-          // return;
         } else {
           this.isBreak = !this.isBreak;
           this.restSeconds = this.breakLen * 60;
           this.rest = this.breakLen;
           this.timer = setInterval(this.setRestTime, 1000);
-          // return;
         }
+        return;
       }
       const newRestSeconds = restSeconds - 1;
       const restMinu = Math.floor(newRestSeconds / 60);
