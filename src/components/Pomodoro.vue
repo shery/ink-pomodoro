@@ -8,24 +8,26 @@
         <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
       </symbol>
     </svg>
-    <button v-on:click="handleBreak(1)">+</button>
-    <span>{{ breakLen }}</span>
-    <button v-on:click="handleBreak(-1)">-</button>
-
-    <button v-on:click="handleSession(1)">+</button>
-    <span>{{ session }}</span>
-    <button v-on:click="handleSession(-1)">-</button>
     <div class="rest">{{ rest }}</div>
     <button class="start"
             v-bind:class="{ active: startClick }"
             v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
-    <div class="water" v-bind:style="{ transform: 'translate(0px, '+ down +'%)' }">
+    <div class="water" v-bind:style="{ transform: 'translate(0px, '+ down +'%)', overflow: restSeconds === 0 ? 'hidden' : '' }">
       <svg class="wave back" viewBox="0 0 560 20">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wave"></use>
       </svg>
       <svg class="wave front" viewBox="0 0 560 20">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wave"></use>
       </svg>
+    </div>
+    <div class="modal">
+      <button v-on:click="handleBreak(1)">+</button>
+      <span>{{ breakLen }}</span>
+      <button v-on:click="handleBreak(-1)">-</button>
+
+      <button v-on:click="handleSession(1)">+</button>
+      <span>{{ session }}</span>
+      <button v-on:click="handleSession(-1)">-</button>
     </div>
   </div>
 </template>
@@ -81,6 +83,7 @@ export default {
         if (this.timer) { clearInterval(this.timer); }
         if (this.isBreak) {
           this.isBreak = !this.isBreak;
+          // TODO fix 0 bug
           this.restSeconds = this.session * 60;
           this.rest = this.session;
           this.timer = setInterval(this.setRestTime, 1000);
@@ -173,6 +176,16 @@ export default {
   outline: none;
 }
 
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+
 .water {
   position: absolute;
   height: 100%;
@@ -192,17 +205,14 @@ export default {
 .wave.back {
   right: 0;
   fill: #2c7fbe;
-  /* animation: wave-back 1.4s infinite linear; */
+  animation: wave-back 2s infinite linear;
 }
 .wave.front {
   left: 0;
   fill: #32bafa;
   margin-bottom: -1px;
-  /* animation: wave-front .7s infinite linear; */
+  animation: wave-front 1s infinite linear;
 }
-
-
-
 
 @keyframes button-scale {
   0% {
@@ -212,6 +222,25 @@ export default {
   100% {
     opacity: 0;
     transform: scale(1.4);
+  }
+}
+
+
+@keyframes wave-front {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes wave-back {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50%, 0);
   }
 }
 
