@@ -8,7 +8,8 @@
     <span>{{ session }}</span>
     <button v-on:click="handleSession(-1)">-</button>
     <div class="rest">{{ rest }}</div>
-    <button v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
+    <button class="start" v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
+    <div class="water"></div>
   </div>
 </template>
 
@@ -78,19 +79,56 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-
-h1 {
-  font-weight: normal;
-}
 .rest {
-  margin: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 6rem;
+  font-weight: 300;
+  line-height: 1;
+  z-index: 9;
+}
+.start {
+  position: absolute;
+  width: 50%;
+  bottom: 8%;
+  left: 25%;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  padding: .7rem 0;
+  background: none;
+  font-weight: 400;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.water {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  background: #32bafa;
+  transform: translate(0, 0);
 }
 
 </style>

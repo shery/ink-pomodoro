@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
 html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -39,6 +39,7 @@ button, input, select, textarea {
 html, body {
   width: 100%;
   height: 100%;
+  font-size: 14px;
 }
 
 html {
@@ -76,6 +77,7 @@ td, th {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: #ffffff;
+  background-color: #051b2c;
 }
 </style>
