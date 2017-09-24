@@ -120,6 +120,22 @@ export default {
   z-index: 10;
 }
 
+.start:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  border: inherit;
+  border-radius: inherit;
+}
+
+.start:focus {
+  outline: none;
+}
+
 .water {
   position: absolute;
   height: 100%;
