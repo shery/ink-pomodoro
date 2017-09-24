@@ -8,8 +8,10 @@
     <span>{{ session }}</span>
     <button v-on:click="handleSession(-1)">-</button>
     <div class="rest">{{ rest }}</div>
-    <button class="start" v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
-    <div class="water"></div>
+    <button class="start"
+            v-bind:class="{ active: startClick }"
+            v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
+    <div class="water" v-bind:style="{ transform: 'translate(0px, '+ down +'%)' }"></div>
   </div>
 </template>
 
@@ -18,6 +20,8 @@ export default {
   name: 'pomodoro',
   data() {
     return {
+      down: 0,
+      startClick: false,
       breakLen: 5,
       session: 25,
       isBreak: false,
@@ -27,6 +31,9 @@ export default {
     };
   },
   methods: {
+    changeStartAction() {
+      this.startClick = !this.startClick;
+    },
     handleBreak(value) {
       if (!this.isPause) return;
       if (this.breakLen === 1 && value === -1) return;
@@ -43,10 +50,14 @@ export default {
       const { isPause } = this;
       if (isPause) {
         this.isPause = !isPause;
+        this.changeStartAction();
+        setTimeout(this.changeStartAction, 300);
         this.timer = setInterval(this.setRestTime, 1000);
       } else {
         clearInterval(this.timer);
         this.isPause = !isPause;
+        this.changeStartAction();
+        setTimeout(this.changeStartAction, 300);
       }
     },
     setRestTime() {
@@ -71,6 +82,11 @@ export default {
       const restSec = Math.floor(newRestSeconds % 60);
       this.rest = `${restMinu}:${restSec}`;
       this.restSeconds = newRestSeconds;
+      if (this.isBreak) {
+        this.down = 100 - Math.floor((newRestSeconds / (this.breakLen * 60)) * 100);
+      } else {
+        this.down = 100 - Math.floor((newRestSeconds / (this.session * 60)) * 100);
+      }
     },
   },
 };
@@ -130,7 +146,13 @@ export default {
   opacity: 0;
   border: inherit;
   border-radius: inherit;
+  transition: all .2s;
 }
+
+.start.active:before {
+  animation: button-scale .3s;
+}
+
 
 .start:focus {
   outline: none;
@@ -144,7 +166,21 @@ export default {
   top: 0;
   left: 0;
   background: #32bafa;
+  transition: all .2s linear;
   transform: translate(0, 0);
 }
+
+
+@keyframes button-scale {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
 
 </style>
