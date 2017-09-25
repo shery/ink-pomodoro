@@ -100,7 +100,7 @@ export default {
       const newRestSeconds = restSeconds - 1
       const restMinu = Math.floor(newRestSeconds / 60)
       const restSec = Math.floor(newRestSeconds % 60)
-      this.rest = `${restMinu}:${restSec}`
+      this.rest = `${(restMinu / 100).toFixed(2).split('.')[1]}:${(restSec / 100).toFixed(2).split('.')[1]}`
       this.restSeconds = newRestSeconds
       if (this.isBreak) {
         this.down = 100 - Math.floor((newRestSeconds / (this.breakLen * 60)) * 100)
