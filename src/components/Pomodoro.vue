@@ -81,6 +81,7 @@ export default {
       const { restSeconds } = this
       if (restSeconds === 0) {
         if (this.timer) { clearInterval(this.timer) }
+        // TODO 添加专注和休息完成回调
         if (this.isBreak) {
           this.isBreak = !this.isBreak
           this.restSeconds = this.session * 60
@@ -93,7 +94,7 @@ export default {
           this.rest = this.breakLen
           this.timer = setInterval(this.setRestTime, 1000)
         }
-        // this.setRestTime()
+        this.setRestTime()
         return
       }
       const newRestSeconds = restSeconds - 1
