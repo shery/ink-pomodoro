@@ -86,7 +86,6 @@ export default {
           this.isBreak = !this.isBreak
           this.restSeconds = this.session * 60
           this.rest = this.session
-
           this.timer = setInterval(this.setRestTime, 1000)
         } else {
           this.isBreak = !this.isBreak
