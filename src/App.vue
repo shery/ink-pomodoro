@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Pomodoro from './components/Pomodoro';
+import Pomodoro from './components/Pomodoro'
 
 export default {
   name: 'app',
   components: {
-    Pomodoro,
-  },
-};
+    Pomodoro
+  }
+}
 </script>
 
 <style>
