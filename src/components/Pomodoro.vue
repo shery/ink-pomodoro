@@ -21,13 +21,15 @@
       </svg>
     </div>
     <div class="modal" v-bind:class="{ active: isModalOpen }">
-      <button v-on:click="handleBreak(1)">+</button>
-      <span>{{ breakLen }}</span>
-      <button v-on:click="handleBreak(-1)">-</button>
+      <div class="modal-body">
+        <button v-on:click="handleBreak(1)">+</button>
+        <span>{{ breakLen }}</span>
+        <button v-on:click="handleBreak(-1)">-</button>
 
-      <button v-on:click="handleSession(1)">+</button>
-      <span>{{ session }}</span>
-      <button v-on:click="handleSession(-1)">-</button>
+        <button v-on:click="handleSession(1)">+</button>
+        <span>{{ session }}</span>
+        <button v-on:click="handleSession(-1)">-</button>
+      </div>
       <div class="modal-bg" v-on:click="hideModal"></div>
     </div>
   </div>
@@ -199,6 +201,28 @@ export default {
 .modal.active {
  display: block;
 }
+.modal-body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 220px;
+  color: rgba(0, 0, 0, 0.87);
+  transition: all .3s;
+  transform: translate(-50%, -25%);
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  z-index: 110;
+  opacity: 0;
+}
+
+.active .modal-body {
+  animation: modal-in .3s;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
 
 .modal-bg {
   position: absolute;
@@ -237,6 +261,19 @@ export default {
   fill: #32bafa;
   margin-bottom: -1px;
   animation: wave-front 1s infinite linear;
+}
+
+@keyframes modal-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -25%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
 }
 
 @keyframes button-scale {
