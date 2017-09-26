@@ -11,7 +11,7 @@
     <div class="rest" v-on:click="showModal">{{ rest }}</div>
     <button class="start"
             v-bind:class="{ active: startClick }"
-            v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
+            v-on:click="handleClick">{{ isPause ? '开始' : '暂停' }}</button>
     <div class="water" v-bind:style="{ transform: 'translate(0px, '+ down +'%)', overflow: restSeconds === 0 ? 'hidden' : '' }">
       <svg class="wave back" viewBox="0 0 560 20">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wave"></use>
