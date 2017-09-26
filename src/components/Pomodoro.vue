@@ -8,7 +8,7 @@
         <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
       </symbol>
     </svg>
-    <div class="rest">{{ rest }}</div>
+    <div class="rest" v-on:click="showModal">{{ rest }}</div>
     <button class="start"
             v-bind:class="{ active: startClick }"
             v-on:click="handleClick">{{ isPause ? 'start' : 'pause' }}</button>
@@ -20,7 +20,7 @@
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wave"></use>
       </svg>
     </div>
-    <div class="modal">
+    <div class="modal" v-bind:class="{ active: isModalOpen }">
       <button v-on:click="handleBreak(1)">+</button>
       <span>{{ breakLen }}</span>
       <button v-on:click="handleBreak(-1)">-</button>
@@ -28,6 +28,7 @@
       <button v-on:click="handleSession(1)">+</button>
       <span>{{ session }}</span>
       <button v-on:click="handleSession(-1)">-</button>
+      <div class="modal-bg" v-on:click="hideModal"></div>
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@ export default {
   name: 'pomodoro',
   data() {
     return {
+      isModalOpen: false,
       down: 0,
       startClick: false,
       breakLen: 5,
@@ -48,6 +50,12 @@ export default {
     }
   },
   methods: {
+    showModal() {
+      this.isModalOpen = true
+    },
+    hideModal() {
+      this.isModalOpen = false
+    },
     changeStartAction() {
       this.startClick = !this.startClick
     },
@@ -125,17 +133,18 @@ export default {
 
 .rest {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
   font-size: 6rem;
   font-weight: 300;
   line-height: 1;
+  transform: translateY(-50%);
   z-index: 9;
+  cursor: pointer;
 }
 .start {
   position: absolute;
@@ -178,12 +187,27 @@ export default {
 }
 
 .modal {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: transparent;
   z-index: 99;
+}
+.modal.active {
+ display: block;
+}
+
+.modal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 100;
 }
 
 
