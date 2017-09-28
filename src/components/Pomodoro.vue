@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     showModal() {
+      if (!this.isPause) return
       this.isModalOpen = true
     },
     hideModal() {
@@ -72,6 +73,7 @@ export default {
       this.session += value
       this.rest = this.session
       this.restSeconds = this.session * 60
+      this.down = 0
     },
     handleClick() {
       const { isPause } = this
