@@ -97,11 +97,13 @@ export default {
         if (this.timer) { clearInterval(this.timer) }
         // TODO 添加专注和休息完成回调
         if (this.isBreak) {
+          if (this.onBreakFinish) this.onBreakFinish()
           this.isBreak = !this.isBreak
           this.restSeconds = this.session * 60
           this.rest = this.session
           this.timer = setInterval(this.setRestTime, 1000)
         } else {
+          if (this.onSessionFinish) this.onSessionFinish()
           this.isBreak = !this.isBreak
           this.restSeconds = this.breakLen * 60
           this.rest = this.breakLen
