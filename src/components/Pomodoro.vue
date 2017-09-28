@@ -47,7 +47,7 @@ export default {
       session: 25,
       isBreak: false,
       isPause: true,
-      rest: 25,
+      rest: '25:00',
       restSeconds: 25 * 60
     }
   },
@@ -71,7 +71,7 @@ export default {
       if (!this.isPause) return
       if (this.session === 1 && value === -1) return
       this.session += value
-      this.rest = this.session
+      this.rest = `${(this.session / 100).toFixed(2).split('.')[1]}:00`
       this.restSeconds = this.session * 60
       this.down = 0
     },
