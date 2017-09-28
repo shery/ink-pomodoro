@@ -24,6 +24,7 @@
       <div class="modal-body">
         <button v-on:click="handleBreak(1)">+</button>
         <span>{{ breakLen }}</span>
+        <input v-model="breakLen">
         <button v-on:click="handleBreak(-1)">-</button>
 
         <button v-on:click="handleSession(1)">+</button>
@@ -38,6 +39,7 @@
 <script>
 export default {
   name: 'pomodoro',
+  props: ['onSessionFinish', 'onBreakFinish'],
   data() {
     return {
       isModalOpen: false,
