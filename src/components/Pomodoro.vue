@@ -22,14 +22,14 @@
     </div>
     <div class="modal" v-bind:class="{ active: isModalOpen }">
       <div class="modal-body">
-        <button v-on:click="handleBreak(1)">+</button>
+        <!-- <button v-on:click="handleBreak(1)">+</button> -->
         <span>{{ breakLen }}</span>
-        <input v-model="breakLen">
-        <button v-on:click="handleBreak(-1)">-</button>
+        <!-- <input v-model="breakLen"> -->
+        <!-- <button v-on:click="handleBreak(-1)">-</button> -->
 
-        <button v-on:click="handleSession(1)">+</button>
+        <!-- <button v-on:click="handleSession(1)">+</button> -->
         <span>{{ session }}</span>
-        <button v-on:click="handleSession(-1)">-</button>
+        <!-- <button v-on:click="handleSession(-1)">-</button> -->
       </div>
       <div class="modal-bg" v-on:click="hideModal"></div>
     </div>
@@ -213,12 +213,12 @@ export default {
   left: 50%;
   width: 80%;
   height: 220px;
-  color: rgba(0, 0, 0, 0.87);
+  color: fff;
+  font-size: 3rem;
+  font-weight: 300;
   transition: all .3s;
   transform: translate(-50%, -25%);
   background-color: transparent;
-  border-radius: 6px;
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
   z-index: 110;
   opacity: 0;
 }
