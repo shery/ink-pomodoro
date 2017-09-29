@@ -216,7 +216,7 @@ export default {
   color: rgba(0, 0, 0, 0.87);
   transition: all .3s;
   transform: translate(-50%, -25%);
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 6px;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
   z-index: 110;
