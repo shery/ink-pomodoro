@@ -147,6 +147,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 84px;
   font-size: 6rem;
   font-weight: 300;
   line-height: 1;
