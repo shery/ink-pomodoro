@@ -204,7 +204,7 @@ export default {
 }
 
 .modal {
-  /* display: none; */
+  display: none;
   position: absolute;
   top: 50%;
   left: 0;
@@ -214,7 +214,7 @@ export default {
   z-index: 99;
 }
 .modal.active {
- /* display: block; */
+ display: block;
 }
 .modal-body {
   position: absolute;
