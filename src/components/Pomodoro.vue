@@ -22,7 +22,7 @@
     </div>
     <div class="modal" v-bind:class="{ active: isModalOpen }">
       <div class="modal-body">
-        <!-- <button v-on:click="handleBreak(1)">+</button> -->
+        <button v-on:click="handleBreak(1)">+</button>
         <div class="textfield">
           <!-- <span>{{ breakLen }}</span> -->
           <input v-model.number="breakLen" type="number">
@@ -34,10 +34,10 @@
         </div>
 
         <!-- <input v-model="breakLen"> -->
-        <!-- <button v-on:click="handleBreak(-1)">-</button> -->
+        <button v-on:click="handleBreak(-1)">-</button>
 
-        <!-- <button v-on:click="handleSession(1)">+</button> -->
-        <!-- <button v-on:click="handleSession(-1)">-</button> -->
+        <button v-on:click="handleSession(1)">+</button>
+        <button v-on:click="handleSession(-1)">-</button>
       </div>
       <div class="modal-bg" v-on:click="hideModal"></div>
     </div>
