@@ -28,6 +28,7 @@
         <div class="operate-container">
           <!-- <button class="operate" v-on:click="handleBreak(1)">+</button> -->
           <div class="textfield">
+            <span class="label">休息时间</span>
             <input v-model.number="breakLen" type="number">
             <div class="underline"></div>
           </div>
@@ -36,6 +37,7 @@
         <div class="operate-container">
           <!-- <button class="operate" v-on:click="handleSession(1)">+</button> -->
           <div class="textfield">
+            <span class="label">专注时间</span>
             <input v-model.number="session" type="number">
             <div class="underline"></div>
           </div>
@@ -254,7 +256,13 @@ input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
   transform: translate(-50%, -50%);
 }
-
+.label {
+  position: absolute;
+  left: 0;
+  top: -17px;
+  font-size: 10px;
+  color: #dadada;
+}
 .close {
   position: absolute;
   top: 15px;
@@ -291,7 +299,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   height: 100%;
 }
 .textfield input {
@@ -299,6 +307,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   font-size: 2.2rem;
   text-align: center;
+  color: #212121;
   border: 0;
   outline: none;
   background: transparent;
@@ -309,7 +318,7 @@ input[type=number]::-webkit-outer-spin-button {
   position: absolute;
   bottom: 0;
   display: block;
-  width: 60%;
+  width: 90%;
   height: 1px;
   background-color: #dadada;
   transition: all .2s;
@@ -317,8 +326,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textfield input:focus + .underline {
-  width: 66%;
-  background-color: #333;
+  width: 100%;
+  background-color: #9c9c9c;
   transform: translateY(1px);
 }
 .water {
