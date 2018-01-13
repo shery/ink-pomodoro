@@ -29,7 +29,7 @@
           <!-- <button class="operate" v-on:click="handleBreak(1)">+</button> -->
           <div class="textfield">
             <span class="label">休息时间</span>
-            <input v-model.number="breakLen" type="number">
+            <input v-model.lazy="breakLen" type="number">
             <div class="underline"></div>
           </div>
           <!-- <button class="operate" v-on:click="handleBreak(-1)">-</button> -->
@@ -38,7 +38,7 @@
           <!-- <button class="operate" v-on:click="handleSession(1)">+</button> -->
           <div class="textfield">
             <span class="label">专注时间</span>
-            <input v-model.number="session" type="number">
+            <input v-model.lazy="session" type="number">
             <div class="underline"></div>
           </div>
           <!-- <button class="operate" v-on:click="handleSession(-1)">-</button> -->
@@ -68,6 +68,16 @@ export default {
       restSeconds: 25 * 60
     }
   },
+  watch: {
+    breakLen: (newBreakLen) => {
+      if (!newBreakLen) return
+      console.log(newBreakLen)
+    },
+    session: (newSession) => {
+      if (!newSession) return
+      console.log(newSession)
+    }
+  },
   methods: {
     showModal() {
       if (!this.isPause) return
@@ -81,8 +91,8 @@ export default {
     },
     handleBreak(value) {
       if (!this.isPause) return
-      if (this.breakLen === 1 && value === -1) return
-      this.breakLen += value
+      if (value < 1) return
+      this.breakLen = value
     },
     handleSession(value) {
       if (!this.isPause) return
