@@ -22,19 +22,27 @@
     </div>
     <div class="modal" v-bind:class="{ active: isModalOpen }">
       <div class="modal-body">
-        <button class="operate" v-on:click="handleBreak(1)">+</button>
-        <div class="textfield">
-          <input v-model.number="breakLen" type="number">
+        <span class="close" v-on:click="hideModal">
+          <i class="el-icon-close"></i>
+        </span>
+        <div class="operate-container">
+          <!-- <button class="operate" v-on:click="handleBreak(1)">+</button> -->
+          <div class="textfield">
+            <input v-model.number="breakLen" type="number">
+            <div class="underline"></div>
+          </div>
+          <!-- <button class="operate" v-on:click="handleBreak(-1)">-</button> -->
+        </div>
+        <div class="operate-container">
+          <!-- <button class="operate" v-on:click="handleSession(1)">+</button> -->
+          <div class="textfield">
+            <input v-model.number="session" type="number">
+            <div class="underline"></div>
+          </div>
+          <!-- <button class="operate" v-on:click="handleSession(-1)">-</button> -->
         </div>
 
-        <div class="textfield">
-          <input v-model.number="session" type="number">
-        </div>
 
-        <button class="operate" v-on:click="handleBreak(-1)">-</button>
-
-        <button class="operate" v-on:click="handleSession(1)">+</button>
-        <button class="operate" v-on:click="handleSession(-1)">-</button>
       </div>
       <div class="modal-bg" v-on:click="hideModal"></div>
     </div>
@@ -134,6 +142,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -203,7 +218,7 @@ export default {
 .modal {
   display: none;
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -217,14 +232,19 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 30px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 80%;
   height: 220px;
-  color: fff;
   font-size: 3rem;
   font-weight: 300;
   transition: all .3s;
   transform: translate(-50%, -25%);
-  background-color: transparent;
+  background-color: #fff;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
   z-index: 110;
   opacity: 0;
 }
@@ -235,6 +255,22 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #555;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all .3s;
+  transform: rotate(0) scale(1, 1);
+}
+.close:hover {
+  transform: rotate(180deg) scale(1.1, 1.1);
+}
 
 .modal-bg {
   position: absolute;
@@ -245,8 +281,46 @@ export default {
   background-color: transparent;
   z-index: 100;
 }
+.operate-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center
+}
+.textfield {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+.textfield input {
+  width: 100%;
+  height: 100%;
+  font-size: 2.2rem;
+  text-align: center;
+  border: 0;
+  outline: none;
+  background: transparent;
+  transition: all .2s;
+}
+.underline {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 60%;
+  height: 1px;
+  background-color: #dadada;
+  transition: all .2s;
+  transform: translateY(4px);
+}
 
-
+.textfield input:focus + .underline {
+  width: 66%;
+  background-color: #333;
+  transform: translateY(1px);
+}
 .water {
   position: absolute;
   height: 100%;
