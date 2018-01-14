@@ -80,4 +80,17 @@ td, th {
   color: #ffffff;
   background-color: #051b2c;
 }
+.input-number {
+  width: 100%;
+}
+
+.input-number .el-input-number__decrease, .input-number .el-input-number__increase {
+  display: none;
+}
+.input-number .el-input {
+  font-size: 2.2rem;
+}
+.input-number .el-input__inner {
+  border: 0;
+}
 </style>

@@ -29,7 +29,8 @@
           <!-- <button class="operate" v-on:click="handleBreak(1)">+</button> -->
           <div class="textfield">
             <span class="label">休息时间</span>
-            <input v-model.lazy="breakLen" type="number">
+            <el-input-number class="input-number" v-model="breakLen" @change="handleBreak" :min="1" :max="60" label=""></el-input-number>
+            <!-- <input v-model="breakLen" type="number"> -->
             <div class="underline"></div>
           </div>
           <!-- <button class="operate" v-on:click="handleBreak(-1)">-</button> -->
@@ -38,7 +39,8 @@
           <!-- <button class="operate" v-on:click="handleSession(1)">+</button> -->
           <div class="textfield">
             <span class="label">专注时间</span>
-            <input v-model.lazy="session" type="number">
+            <el-input-number class="input-number" v-model="session" @change="handleSession" :min="1" :max="60" label=""></el-input-number>
+            <!-- <input v-model="session" type="number"> -->
             <div class="underline"></div>
           </div>
           <!-- <button class="operate" v-on:click="handleSession(-1)">-</button> -->
@@ -68,16 +70,6 @@ export default {
       restSeconds: 25 * 60
     }
   },
-  watch: {
-    breakLen: (newBreakLen) => {
-      if (!newBreakLen) return
-      console.log(newBreakLen)
-    },
-    session: (newSession) => {
-      if (!newSession) return
-      console.log(newSession)
-    }
-  },
   methods: {
     showModal() {
       if (!this.isPause) return
@@ -91,13 +83,11 @@ export default {
     },
     handleBreak(value) {
       if (!this.isPause) return
-      if (value < 1) return
       this.breakLen = value
     },
     handleSession(value) {
       if (!this.isPause) return
-      if (this.session === 1 && value === -1) return
-      this.session += value
+      this.session = value
       this.rest = `${(this.session / 100).toFixed(2).split('.')[1]}:00`
       this.restSeconds = this.session * 60
       this.down = 0
@@ -299,6 +289,7 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: transparent;
   z-index: 100;
 }
+
 .operate-container {
   display: flex;
   justify-content: space-around;
