@@ -20,7 +20,7 @@
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wave"></use>
       </svg>
     </div>
-    <div class="modal" v-bind:class="{ active: isModalOpen }">
+    <div class="modal" v-bind:class="{ active: isModalOpen, leaving: isLeaving }">
       <div class="modal-body">
         <span class="close" v-on:click="hideModal">
           <i class="el-icon-close"></i>
@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       isModalOpen: false,
+      isLeaving: false,
       down: 0,
       startClick: false,
       breakLen: 5,
@@ -76,7 +77,12 @@ export default {
       this.isModalOpen = true
     },
     hideModal() {
-      this.isModalOpen = false
+      const that = this
+      this.isLeaving = true
+      setTimeout(() => {
+        that.isLeaving = false
+        that.isModalOpen = false
+      }, 300)
     },
     changeStartAction() {
       this.startClick = !this.startClick
@@ -256,6 +262,9 @@ input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
   transform: translate(-50%, -50%);
 }
+.active.leaving .modal-body {
+  animation: modal-out .3s;
+}
 .label {
   position: absolute;
   left: 0;
@@ -364,11 +373,20 @@ input[type=number]::-webkit-outer-spin-button {
     opacity: 0;
     transform: translate(-50%, -25%);
   }
-  50% {
+  100% {
     opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes modal-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
   100% {
-    transform: translate(-50%, -50%);
+    opacity: 0;
+    transform: translate(-50%, -25%);
   }
 }
 
