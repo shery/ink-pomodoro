@@ -31,5 +31,5 @@ npm test
 
 |  参数  |  说明  |  类型  |  默认值  |
 |-------|-------|-------|-------|
-|`onSessionFinish`|专注时间结束|function| - |
-|`onBreakFinish`|休息时间结束|function| - |
+|onSessionFinish|专注时间结束|function| - |
+|onBreakFinish|休息时间结束|function| - |
