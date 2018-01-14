@@ -71,6 +71,19 @@ export default {
       restSeconds: 25 * 60
     }
   },
+  mounted: () => {
+    const textfieldList = document.querySelectorAll('.textfield')
+    textfieldList.forEach((element) => {
+      const inputNode = element.querySelector('input')
+      const underlineNode = element.querySelector('.underline')
+      inputNode.addEventListener('focus', () => {
+        underlineNode.className = 'underline focus'
+      }, false)
+      inputNode.addEventListener('blur', () => {
+        underlineNode.className = 'underline'
+      }, false)
+    })
+  },
   methods: {
     showModal() {
       if (!this.isPause) return
@@ -335,7 +348,7 @@ input[type=number]::-webkit-outer-spin-button {
   transform: translateY(4px);
 }
 
-.textfield input:focus + .underline {
+.underline.focus {
   width: 100%;
   background-color: #9c9c9c;
   transform: translateY(1px);
